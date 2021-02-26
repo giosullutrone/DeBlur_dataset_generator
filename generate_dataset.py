@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-n", "--number_of_images", help="How many inputs to generate", type=int, required=True)
 
-    parser.add_argument("-k", "--kernel_size", help="Kernel size of the gaussian blur", nargs=2, type=int, required=False,
+    parser.add_argument("-k", "--kernel_size", help="Kernel size of the gaussian blur: ex 9 9 => (9, 9)", nargs=2, type=int, required=False,
                         default=(9, 9))
     parser.add_argument("-s", "--size", help="Size of each patch", nargs=2, type=int, required=False,
                         default=(224, 224))
