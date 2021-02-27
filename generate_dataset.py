@@ -10,17 +10,20 @@ if __name__ == "__main__":
 
     parser.add_argument("-n", "--number_of_images", help="How many inputs to generate", type=int, required=True)
 
-    parser.add_argument("-k", "--kernel_size", help="Kernel size of the gaussian blur: ex 9 9 => (9, 9)", nargs=2, type=int, required=False,
-                        default=(9, 9))
-    parser.add_argument("-s", "--size", help="Size of each patch", nargs=2, type=int, required=False,
-                        default=(224, 224))
+    parser.add_argument("-k", "--kernel_size", help="Possible kernel sizes for the gaussian blur. Default: 3 5 9", nargs="+", type=int,
+                        required=False, default=(3, 5, 9))
 
-    parser.add_argument("-v", "--validation_size", help="Validation size compared to training size", type=float, required=False,
-                        default=0.25)
+    parser.add_argument("-s", "--size", help="Size of each image. Default: 224 224", nargs=2, type=int, required=False,
+                        default=(224, 224))
+    parser.add_argument("-f", "--full_image", help="Whether to use the full image or a section. Default: False", nargs=1, type=bool, required=False,
+                        default=False)
+
+    parser.add_argument("-v", "--validation_size", help="Validation size compared to training size. Default: 0.25", type=float,
+                        required=False, default=0.25)
 
     args = parser.parse_args()
 
-    assert 0.0 < args.validation_size < 1.0, "Validation size should be between 0.0 and 1.0..."
+    assert 0.0 <= args.validation_size <= 1.0, "Validation size should be between 0.0 and 1.0..."
 
     input_folder = get_fixed_path(args.input_folder, replace_backslash=True, add_backslash=True)
     output_folder = get_fixed_path(args.output_folder, replace_backslash=True, add_backslash=True)
@@ -29,6 +32,7 @@ if __name__ == "__main__":
 
     gen.generate_dataset(folder_images_output=output_folder,
                          number_of_images=args.number_of_images,
-                         section_size=tuple(args.size),
-                         kernel_size=tuple(args.kernel_size),
+                         size=tuple(args.size),
+                         kernel_sizes=tuple(args.kernel_size),
+                         full_image=args.full_image,
                          validation_size=args.validation_size)
