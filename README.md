@@ -7,10 +7,11 @@ This project lets you:
 ![](docs/Example.png)
 
 ## How It Works
-###Arguments
+### Arguments
+
 ![](docs/Help.png)
 
-###Example
+### Example
     python generate_dataset.py -i "G:/sharp_images_of_cats" -o "G:/dataset" -n 100 -k 3 9 27 -s 224 224
 Will create train and validation folders in G:/dataset containing:
 * **-n 100** => 100 images total between training and validation
